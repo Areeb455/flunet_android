@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -111,11 +112,8 @@ fun DashboardContent(devices: List<DiscoveredDevice>, isScanning: Boolean, onSca
             Text("Discovered Devices (${devices.size})", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.White)
             Spacer(modifier = Modifier.height(16.dp))
 
-            if (isScanning && devices.isEmpty()) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator()
-                }
-            } else if (!isScanning && devices.isEmpty()) {
+            // The logic is now simplified. The central CircularProgressIndicator has been removed.
+            if (!isScanning && devices.isEmpty()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text("No devices found.\nPull down to scan again.", color = Color.Gray, fontSize = 16.sp, textAlign = TextAlign.Center)
                 }
