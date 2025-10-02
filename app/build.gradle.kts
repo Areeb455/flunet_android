@@ -39,7 +39,7 @@ android {
     }
 
     dependencies {
-        implementation ("org.jmdns:jmdns:3.5.7")
+        implementation (libs.jmdns)
         implementation("androidx.compose.material:material:1.6.8")
         implementation("com.google.accompanist:accompanist-permissions:0.35.1-alpha")
         implementation("co.yml:ycharts:2.1.0")
