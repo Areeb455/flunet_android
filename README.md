@@ -4,7 +4,9 @@ A powerful, standalone network analysis and monitoring tool built entirely with 
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/cde1545d-c4b8-4ab2-a59b-cfc4cf8cf13f" width="220" alt="Dashboard Screen">
-  <img src="https://github.com/user-attachments/assets/6cceffc1-1699-4412-8010-dee1c2e8ab5" width="220" alt="Live Traffic Screen">
+
+
+  <img src="https://github.com/user-attachments/assets/18876eed-688c-495b-b7fe-fe2245d61c50" width="220" alt="Live Traffic Screen">
   <img src="https://github.com/user-attachments/assets/ebf75128-3fcb-4c25-857c-911312bf2bf2" width="220" alt="Wi-Fi Health Screen">
   <img src="https://github.com/user-attachments/assets/beb20089-898a-43df-a1af-16e84261574b" width="220" alt="Security Scan Screen">
 </p>
