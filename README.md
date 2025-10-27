@@ -16,8 +16,7 @@ A powerful, standalone network analysis and monitoring tool built entirely with 
 FluNet combines multiple networking tools into one clean, multi-screen interface:
 
   * **Device Discovery (Real ARP Scan)**
-    A high-speed, multi-threaded ARP scanner that discovers all devices connected to your Wi-Fi network. It reliably finds the IP address, MAC address, and even performs a reverse-DNS lookup to discover device hostnames (e.g., "My-Laptop.local", "Pixel-8-Pro").
-
+    A high-speed, multi-threaded ARP scanner that discovers all devices connected to your Wi-Fi network. It reliably finds the IP address and MAC address.
   * **Live Traffic Monitor (Real `TrafficStats`)**
     A real-time, dual-line graph that plots your phone's **Download (Cyan)** and **Upload (Magenta)** bandwidth usage, pulling data directly from Android's `TrafficStats` API. The chart automatically scrolls and can be panned, just like professional monitoring tools.
 
