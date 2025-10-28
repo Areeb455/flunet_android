@@ -42,11 +42,9 @@ fun SecurityScreen(viewModel: SecurityViewModel) {
     val state by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
-    // The UI now shows an initial "Start Scan" button for manual control.
     if (state.status == "Ready to scan") {
         InitialSecurityScanScreen(onScanClick = { viewModel.startSecurityScan(context) })
     } else {
-        // This is the main results/progress screen
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -116,8 +114,6 @@ fun ScanStatusCard(state: SecurityScanState) {
         }
     }
 }
-
-// The VulnerabilityCard is now interactive and expandable.
 @Composable
 fun VulnerabilityCard(vulnerability: Vulnerability) {
     var expanded by remember { mutableStateOf(false) }
@@ -155,7 +151,6 @@ fun VulnerabilityCard(vulnerability: Vulnerability) {
                 )
             }
 
-            // This section smoothly expands to show the detailed risk info when the card is tapped.
             AnimatedVisibility(
                 visible = expanded,
                 enter = expandVertically(animationSpec = tween(300)),
@@ -185,7 +180,6 @@ fun SecurityScreenPreview() {
         status = "Scan Complete"
     )
     FlunetAndroidTheme {
-        // We can't easily preview the ViewModel, so we'll just show one of the states
         Column(Modifier.padding(16.dp)) {
             VulnerabilityCard(vulnerability = previewState.vulnerabilities[0])
         }

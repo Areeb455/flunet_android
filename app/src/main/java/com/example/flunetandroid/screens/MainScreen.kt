@@ -29,7 +29,6 @@ import com.example.flunetandroid.TrafficViewModel
 import com.example.flunetandroid.WifiHealthViewModel
 
 
-// --- Data Models for Navigation ---
 sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
     object Dashboard : Screen("dashboard", "Dashboard", Icons.Default.Person)
     object Traffic : Screen("traffic", "Traffic", Icons.Default.Add)
@@ -83,10 +82,8 @@ fun MainScreen(
             Modifier.padding(innerPadding)
         ) {
             composable(Screen.Dashboard.route) {
-                // Collect the live data from the ViewModel
                 val devices by dashboardViewModel.devices.collectAsState()
                 val isScanning by dashboardViewModel.isScanning.collectAsState()
-                // Pass the live data AND the scan function to the DashboardScreen UI
                 DashboardScreen(
                     devices = devices,
                     isScanning = isScanning,

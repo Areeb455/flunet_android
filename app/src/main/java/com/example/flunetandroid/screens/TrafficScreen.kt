@@ -27,18 +27,14 @@ import com.example.flunetandroid.TrafficViewModel
 
 @Composable
 fun TrafficScreen(trafficViewModel: TrafficViewModel) {
-    // Collect all the new, separate states from the ViewModel
     val status by trafficViewModel.status.collectAsState()
     val downloadPoints by trafficViewModel.downloadPoints.collectAsState()
     val uploadPoints by trafficViewModel.uploadPoints.collectAsState()
     val downloadSpeed by trafficViewModel.downloadSpeed.collectAsState()
     val uploadSpeed by trafficViewModel.uploadSpeed.collectAsState()
-
-    // Create separate Point data for each line
     val downloadPointsData = downloadPoints.mapIndexed { index, value -> Point(index.toFloat(), value) }
     val uploadPointsData = uploadPoints.mapIndexed { index, value -> Point(index.toFloat(), value) }
 
-    // Calculate peak download for the Y-axis range
     val peakDownload = downloadPoints.maxOrNull() ?: 0f
 
     Column(
@@ -52,7 +48,6 @@ fun TrafficScreen(trafficViewModel: TrafficViewModel) {
         Text("Status: $status", color = Color.Green, style = MaterialTheme.typography.bodyMedium)
         Spacer(Modifier.height(24.dp))
 
-        // Updated Stats Card to show separate Download, Upload, and Peak
         StatsCard(download = downloadSpeed, upload = uploadSpeed, peak = peakDownload)
 
         Spacer(Modifier.height(24.dp))
@@ -64,7 +59,7 @@ fun TrafficScreen(trafficViewModel: TrafficViewModel) {
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    // New: Chart Legend
+
                     ChartLegend()
                     Spacer(modifier = Modifier.height(16.dp))
 
@@ -94,7 +89,6 @@ fun TrafficScreen(trafficViewModel: TrafficViewModel) {
                     val lineChartData = LineChartData(
                         linePlotData = LinePlotData(
                             lines = listOf(
-                                // Download Line (Cyan)
                                 Line(
                                     dataPoints = downloadPointsData,
                                     lineStyle = LineStyle(color = Color.Cyan, width = 8f, lineType = LineType.SmoothCurve()),
@@ -103,7 +97,6 @@ fun TrafficScreen(trafficViewModel: TrafficViewModel) {
                                     shadowUnderLine = ShadowUnderLine(alpha = 0.5f, brush = Brush.verticalGradient(colors = listOf(Color.Cyan, Color.Transparent))),
                                     selectionHighlightPopUp = SelectionHighlightPopUp(popUpLabel = { _, y -> String.format("DL: %.2f Mbps", y) })
                                 ),
-                                // Upload Line (Magenta)
                                 Line(
                                     dataPoints = uploadPointsData,
                                     lineStyle = LineStyle(color = Color.Magenta, width = 6f, lineType = LineType.SmoothCurve()),

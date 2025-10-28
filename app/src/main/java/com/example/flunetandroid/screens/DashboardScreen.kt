@@ -39,10 +39,8 @@ fun DashboardScreen(devices: List<DiscoveredDevice>, isScanning: Boolean, onScan
     )
 
     if (locationPermissionState.status.isGranted) {
-        // If permission is already granted, show the main dashboard content
         DashboardContent(devices = devices, isScanning = isScanning, onScanClick = onScanClick)
     } else {
-        // If permission is not granted, show the explanatory screen to the user
         PermissionRequestScreen(
             title = "Permission Required for Scanning",
             description = "On modern Android, location permission is required to discover devices on your Wi-Fi network. FluNet needs this permission to perform a network scan. Your location data is not read, stored, or shared.",
@@ -51,7 +49,6 @@ fun DashboardScreen(devices: List<DiscoveredDevice>, isScanning: Boolean, onScan
     }
 }
 
-// A clean UI to explain why the location permission is needed
 @Composable
 fun PermissionRequestScreen(title: String, description: String, onGrantPermission: () -> Unit) {
     Column(
@@ -81,12 +78,9 @@ fun PermissionRequestScreen(title: String, description: String, onGrantPermissio
     }
 }
 
-
-// This is the main dashboard UI, which is only shown after permission is granted.
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DashboardContent(devices: List<DiscoveredDevice>, isScanning: Boolean, onScanClick: () -> Unit) {
-    // This automatically triggers the scan once when the content is first shown
     LaunchedEffect(key1 = true) {
         if (devices.isEmpty() && !isScanning) {
             onScanClick()
@@ -95,7 +89,7 @@ fun DashboardContent(devices: List<DiscoveredDevice>, isScanning: Boolean, onSca
 
     val pullRefreshState = rememberPullRefreshState(
         refreshing = isScanning,
-        onRefresh = onScanClick // Pulling down now calls the scan function
+        onRefresh = onScanClick
     )
 
     Box(modifier = Modifier.fillMaxSize().pullRefresh(pullRefreshState)) {
@@ -112,7 +106,6 @@ fun DashboardContent(devices: List<DiscoveredDevice>, isScanning: Boolean, onSca
             Text("Discovered Devices (${devices.size})", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.White)
             Spacer(modifier = Modifier.height(16.dp))
 
-            // The logic is now simplified. The central CircularProgressIndicator has been removed.
             if (!isScanning && devices.isEmpty()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text("No devices found.\nPull down to scan again.", color = Color.Gray, fontSize = 16.sp, textAlign = TextAlign.Center)
@@ -126,7 +119,6 @@ fun DashboardContent(devices: List<DiscoveredDevice>, isScanning: Boolean, onSca
             }
         }
 
-        // The visual indicator for the pull-to-refresh action
         PullRefreshIndicator(
             refreshing = isScanning,
             state = pullRefreshState,
@@ -135,7 +127,6 @@ fun DashboardContent(devices: List<DiscoveredDevice>, isScanning: Boolean, onSca
     }
 }
 
-// Helper function to provide a more descriptive name and icon for the UI
 fun guessDeviceType(device: DiscoveredDevice): Pair<DeviceType, String> {
     if (device.ip.endsWith(".1")) return Pair(DeviceType.ROUTER, "Gateway Router")
 
